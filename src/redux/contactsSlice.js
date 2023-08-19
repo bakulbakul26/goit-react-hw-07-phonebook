@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://64de4c95825d19d9bfb26b2d.mockapi.io/'; // Zaktualizowana baza URL
+axios.defaults.baseURL = 'https://64de4c95825d19d9bfb26b2d.mockapi.io/';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/FETCH_ALL',
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get('/contacts'); // Aktualizowana ścieżka do zasobu
-      return data;
+      const { data } = await axios.get('/contacts');
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -19,7 +18,7 @@ export const addContact = createAsyncThunk(
   'contacts/ADD_CONTACT',
   async ({ name, number }, thunkAPI) => {
     try {
-      const { data } = await axios.post('/contacts', { name, number }); // Aktualizowana ścieżka do zasobu
+      const { data } = await axios.post('/contacts', { name, number });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -31,7 +30,7 @@ export const deleteContact = createAsyncThunk(
   'contacts/DELETE_CONTACT',
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`/contacts/${id}`); // Aktualizowana ścieżka do zasobu
+      await axios.delete(`/contacts/${id}`);
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,7 +42,7 @@ export const toggleFavorite = createAsyncThunk(
   'contacts/TOGGLE_FAVORITE',
   async ({ favorite, id }, thunkAPI) => {
     try {
-      const { data } = await axios.put(`/contacts/${id}`, { favorite }); // Aktualizowana ścieżka do zasobu
+      const { data } = await axios.put(`/contacts/${id}`, { favorite });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -58,9 +57,7 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    // Możesz dodać tutaj własne akcje synchroniczne, jeśli potrzebujesz
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, state => {

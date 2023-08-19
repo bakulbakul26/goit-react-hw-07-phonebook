@@ -1,6 +1,6 @@
-import React from 'react'; // Upewnij się, że importujesz React
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteContact, toggleFavorite } from './actions'; // Importuj odpowiednie akcje
+import { deleteContact, toggleFavorite } from './actions';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
