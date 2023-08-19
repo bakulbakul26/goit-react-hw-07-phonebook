@@ -8,6 +8,7 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.get('/contacts');
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -18,7 +19,7 @@ export const addContact = createAsyncThunk(
   'contacts/ADD_CONTACT',
   async ({ name, number }, thunkAPI) => {
     try {
-      const { data } = await axios.post('/contacts', { name, number });
+      const { data } = await axios.post('/contacts', { name, number }); // Aktualizowana ścieżka do zasobu
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -30,7 +31,7 @@ export const deleteContact = createAsyncThunk(
   'contacts/DELETE_CONTACT',
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`/contacts/${id}`);
+      await axios.delete(`/contacts/${id}`); // Aktualizowana ścieżka do zasobu
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -42,7 +43,7 @@ export const toggleFavorite = createAsyncThunk(
   'contacts/TOGGLE_FAVORITE',
   async ({ favorite, id }, thunkAPI) => {
     try {
-      const { data } = await axios.put(`/contacts/${id}`, { favorite });
+      const { data } = await axios.put(`/contacts/${id}`, { favorite }); // Aktualizowana ścieżka do zasobu
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -57,7 +58,9 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    // Możesz dodać tutaj własne akcje synchroniczne, jeśli potrzebujesz
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, state => {
